@@ -8,12 +8,13 @@
 }
 
 h1 {
-  position: relative; /* maybe make this absolute to stop other containers moving */
-  margin-bottom: 2vw;
+  position: absolute; /* maybe make this absolute to stop other containers moving */
+  margin-bottom: 10vw;
   font-family: arcadeclassicregular;
   color: #1faffe;
   text-align: center;
   font-size: 8vw; /* font is 8% of view window, i.e. resizes with window */
+  width: 100%;
 }
 
 body {
@@ -21,10 +22,11 @@ body {
 }
 
 .worldmap {
-  position: relative;
-  margin-left: auto;
+  position: absolute;
+  margin-top: 18vw;
+  margin-left: 12vw;
   margin-right: auto;
-  width: 70%;
+  width: 80%;
 }
 
 .worldregion {
@@ -55,17 +57,17 @@ body {
 }
 #asia {
   background: url("imgs/asiaF2.png") no-repeat center / contain;
-  width: 29vw;
+  width: 28vw;
   height: 23.5vw;
-  margin-top: 0.7vw;
-  margin-left: 38vw;
+  margin-top: 0.65vw;
+  margin-left: 38.25vw;
 }
 #oceania {
   background: url("imgs/oceaniaF2.png") no-repeat center / contain;
-  width: 14.25vw;
+  width: 14vw;
   height: 12vw;
-  margin-top: 22vw;
-  margin-left: 58.1vw;
+  margin-top: 21.475vw;
+  margin-left: 57.5vw;
 }
 #africa {
   background: url("imgs/africaF2.png")  no-repeat center / contain;

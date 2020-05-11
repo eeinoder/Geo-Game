@@ -4,6 +4,8 @@ const colors = ["fd747d","fdc674","fdf674","7bf184","90ccfd","9c90fd","eb90fd"];
 const defColor = "1faffe";
 
 var isInStrobe = 0; // global var: defines if grayStrobe is active. Disables things if true.
+var lastClickedObj; // last continent object clicked
+var lastHoverObj;
 
 
 
@@ -33,7 +35,8 @@ var isInStrobe = 0; // global var: defines if grayStrobe is active. Disables thi
     }
     if (action === "grayStrobe") { // toggle grayscale filter to create kind of strobe effect
       $(this).click(function () {
-        if (isInStrobe === 1) {return -1;} // Another continent is in this animation.
+        if (isInStrobe === 1) {return -1;}  // Another continent is in this animation.
+        lastClickedObj = this;
         isInStrobe = 1;
         grayStrobe($(this), 2*iters, delay);
       });
@@ -99,7 +102,7 @@ function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
 /* MAP EFFECTS HANDLERS: HOVER, CLICK, ETC. */
 
 // Title animations
-$("h1").animateExtra("clrWave", 14, 70, true);
+$("h1").animateExtra("clrWave", 14, 70, true).animateExtra("breathe");
 
 // Continent click animation
 $(".worldregion").animateExtra("grayStrobe", 5, 100);
@@ -107,21 +110,23 @@ $(".worldregion").animateExtra("grayStrobe", 5, 100);
 // Continent hover effects
 $(".worldregion").hover(function(){
   //console.log(this.id);
+  lastHoverObj = this; // use to handle case if obj is "mideast", toggle "asia" obj instead
   if (isInStrobe === 1) {return;}
-  this.style.filter = "grayscale(0%)";
+  if (lastClickedObj !== undefined) {lastClickedObj.style.filter = "grayscale(100%)";}
+  if (this.id === "mideast") {lastHoverObj = document.getElementById("asia");}
+  lastHoverObj.style.filter = "grayscale(0%)";
 }, function() {
   if (isInStrobe === 1) {return;}
-  this.style.filter = "grayscale(100%)";
+  lastHoverObj.style.filter = "grayscale(100%)";
 });
 
-$("#mideast").hover(function(){
-  if (isInStrobe === 1) {return;}
-  document.getElementById("asia").style.filter = "grayscale(0%)";
-}, function(){
-  if (isInStrobe === 1) {return;}
-  document.getElementById("asia").style.filter = "grayscale(100%)";
-}); // Use to adjust color toggle on hover over asia (instead of Africa)
+// Click anywhere on document to reset last clicked Object to default grayscale
+$(document).click(function() {
+  console.log("Clicked!")
+  console.log(lastClickedObj);
+  if (lastClickedObj === undefined) {return;} // Continent obj not clicked yet.
+  lastClickedObj.style.filter = "grayscale(100%)";
+});
 
-//
 
 /* End of script */
