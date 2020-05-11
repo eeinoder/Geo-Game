@@ -24,46 +24,61 @@ body {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 70%;
 }
 
 .worldregion {
   position: absolute;
-  border: 2px solid black;
-  width: 15vw;
-  height: 15vw;
+  /*border: 2px solid black;*/ /* enable to see "hitboxes" of continents */
   filter: grayscale(100%);
-}
-
-.worldregion:hover {
-  filter: grayscale(0%);
 }
 
 
 #namerica {
   background: url("imgs/namericaF2.png") no-repeat center / contain;
+  width: 32vw;
+  height: 20vw;
 }
 #samerica {
   background: url("imgs/samericaF2.png") no-repeat center / contain;
-  margin-top: 20vw;
+  width: 15vw;
+  height: 20vw;
+  margin-top: 18.35vw;
+  margin-left: 11.75vw;
 }
 #europe {
   background: url("imgs/europeF2.png") no-repeat center / contain;
-  margin-left: 20vw;
+  width: 15.05vw;
+  height: 11vw;
+  margin-top: 1vw;
+  margin-left: 30vw;
 }
 #asia {
   background: url("imgs/asiaF2.png") no-repeat center / contain;
-  margin-left: 40vw;
+  width: 29vw;
+  height: 23.5vw;
+  margin-top: 0.7vw;
+  margin-left: 38vw;
 }
 #oceania {
   background: url("imgs/oceaniaF2.png") no-repeat center / contain;
-  margin-top: 20vw;
-  margin-left: 40vw;
+  width: 14.25vw;
+  height: 12vw;
+  margin-top: 22vw;
+  margin-left: 58.1vw;
 }
 #africa {
   background: url("imgs/africaF2.png")  no-repeat center / contain;
-  margin-top: 20vw;
-  margin-left: 20vw;
+  width: 17vw;
+  height: 20vw;
+  margin-top: 11.5vw;
+  margin-left: 27.6vw;
+}
+#mideast {
+  width: 5.5vw;
+  height: 7vw;
+  margin-top: 10vw;
+  margin-left: 40vw;
 }
 
 

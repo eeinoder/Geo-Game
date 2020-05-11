@@ -1,7 +1,9 @@
-const dPx = 10; //TODO: change these to optional parameters in animateTitle
+const dPx = 10; //TODO: change these to optional parameters in animateExtra
 const dT = 400;
 const colors = ["fd747d","fdc674","fdf674","7bf184","90ccfd","9c90fd","eb90fd"];
 const defColor = "1faffe";
+
+var isInStrobe = 0; // global var: defines if grayStrobe is active. Disables things if true.
 
 
 
@@ -15,21 +17,26 @@ const defColor = "1faffe";
     isOut:      [opt] does color wave continue out (true) or not (false)
 */
 (function($) {
-  $.fn.animateTitle = function(action, wavIters, wavDelay, wavIsOut) {
+  $.fn.animateExtra = function(action, iters, delay, wavIsOut) {
     if (action === "breathe") {
       $(this).animate({"fontSize": "+="+dPx+"px"}, dT, function() {
         $(this).animate({"fontSize": "+="+(-1*dPx)+"px"}, dT);
-        $(this).animateTitle("breathe");
+        $(this).animateExtra("breathe");
       });
     }
     if (action === "clrWave") {
-      var iters = wavIters;
-      var delay = wavDelay;
       var isOut = wavIsOut;
       if (iters === undefined) {iters = 8;}
       if (delay === undefined) {delay = 100;}
       if (isOut === undefined) {isOut = false;}
       $(this).click(function () {colorWaveIn($(this), 0, iters, delay, isOut);});
+    }
+    if (action === "grayStrobe") { // toggle grayscale filter to create kind of strobe effect
+      $(this).click(function () {
+        if (isInStrobe === 1) {return -1;} // Another continent is in this animation.
+        isInStrobe = 1;
+        grayStrobe($(this), 2*iters, delay);
+      });
     }
     return this;
   };
@@ -75,15 +82,46 @@ function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
    }
  }
 
+ function grayStrobe(thisObj, iters, delay) {
+   // Toggle grayscale: 0, 1, 0, 1, ...
+   // Iters is doubled, i.e. for 4 cycles, you toggle grayscale 8 times
+   iters--;
+   if (iters < 0) {
+     isInStrobe = 0;
+     return -1;
+   }
+   thisObj.css("filter", "grayscale("+iters%2+")");
+   setTimeout(function(){grayStrobe($(thisObj),iters,delay)}, delay);
+ }
+
 
 
 /* MAP EFFECTS HANDLERS: HOVER, CLICK, ETC. */
 
-//$(".region").click();
+// Title animations
+$("h1").animateExtra("clrWave", 14, 70, true);
 
-$(".image").hover(function(){console.log(this.id);})
+// Continent click animation
+$(".worldregion").animateExtra("grayStrobe", 5, 100);
 
-$("h1").animateTitle("clrWave", 14, 70, true);
-//$("h1").animateTitle("clrWave", 14, 70, true);
+// Continent hover effects
+$(".worldregion").hover(function(){
+  //console.log(this.id);
+  if (isInStrobe === 1) {return;}
+  this.style.filter = "grayscale(0%)";
+}, function() {
+  if (isInStrobe === 1) {return;}
+  this.style.filter = "grayscale(100%)";
+});
+
+$("#mideast").hover(function(){
+  if (isInStrobe === 1) {return;}
+  document.getElementById("asia").style.filter = "grayscale(0%)";
+}, function(){
+  if (isInStrobe === 1) {return;}
+  document.getElementById("asia").style.filter = "grayscale(100%)";
+}); // Use to adjust color toggle on hover over asia (instead of Africa)
+
+//
 
 /* End of script */
