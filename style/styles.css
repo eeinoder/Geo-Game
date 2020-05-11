@@ -1,0 +1,82 @@
+@font-face {
+    font-family: arcadeclassicregular;
+    src: url('fonts/arcadeclassic-webfont.ttf'),
+         url('fonts/arcadeclassic-webfont.woff'),
+         url('fonts/arcadeclassic-webfont.woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+  position: relative; /* maybe make this absolute to stop other containers moving */
+  margin-bottom: 2vw;
+  font-family: arcadeclassicregular;
+  color: #1faffe;
+  text-align: center;
+  font-size: 8vw; /* font is 8% of view window, i.e. resizes with window */
+}
+
+body {
+  background-color: #75fbfd;
+}
+
+.worldmap {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.worldregion {
+  position: absolute;
+  border: 2px solid black;
+  width: 15vw;
+  height: 15vw;
+  filter: grayscale(100%);
+}
+
+.worldregion:hover {
+  filter: grayscale(0%);
+}
+
+
+#namerica {
+  background: url("imgs/namericaF2.png") no-repeat center / contain;
+}
+#samerica {
+  background: url("imgs/samericaF2.png") no-repeat center / contain;
+  margin-top: 20vw;
+}
+#europe {
+  background: url("imgs/europeF2.png") no-repeat center / contain;
+  margin-left: 20vw;
+}
+#asia {
+  background: url("imgs/asiaF2.png") no-repeat center / contain;
+  margin-left: 40vw;
+}
+#oceania {
+  background: url("imgs/oceaniaF2.png") no-repeat center / contain;
+  margin-top: 20vw;
+  margin-left: 40vw;
+}
+#africa {
+  background: url("imgs/africaF2.png")  no-repeat center / contain;
+  margin-top: 20vw;
+  margin-left: 20vw;
+}
+
+
+/* Positioning elements/stacking order is HORRIBLE */
+/* "Choosing how to position an element in CSS is sometimes really a
+   choice about what side effects are most acceptable." -Josh Ogle */
+/* I could have used AWS, but I prefer complete freedom, full control
+   over security, and learning how things are built. */
+
+/*      PROBLEM -> SOLUTION (?)
+    -Can't hover over hidden images -> set grayscale 100% of every continent, 0 on hover
+
+    -"on hover" jquery event triggers for container dimensions (because width:100%),
+      BUT need width:100 for resizing purposes...
+
+*/

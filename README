@@ -1,0 +1,48 @@
+# Geo
+
+Geo is a Geography Quiz that tests your knowledge of world measurements.
+Challenge your friends to determine the GeoKing (TM).
+
+Exercise using HTML, CSS, Javascript, JSON file manipulation.
+
+## Features
+
+
+
+
+Game mode Ideas:
+  **random deep moral questions: "You've just ascended the throne. Do you keep power
+  at all costs or help neighboring nations."
+
+
+UI/Dynamic web page ideas:
+  hover over continent -> turns magenta; click -> blinks (?) ->
+  Zoom into country, surrounding map becomes opaque/foggy
+
+
+Easter egg Ideas:
+  click on title -> rainbow effect                              //DONE//
+
+  ISS as dot moving across map
+
+  "I'm feeling lucky" button -> countries blink in random sequence, all different colors
+
+  Wii-like alert: "You've been playing for a while, would you like to take a ... break?"
+
+  Secret mythical world game-modes, e.g. Middle Earth questions, Star Wars, etc.
+
+
+
+Topics/Questions...
+  Apache vs local server ? How to set up and why set it up?
+  // Use local server (via Apache is good) for testing.
+  // Connect to (remote, i.e. not on same machine) local server, LAN
+  // Connect to web server, WAN
+
+  What is Apache, XAMPP, etc...
+
+  Cloud computing vs. Home/personal server
+
+  Git pages - hosting site, make changes to live web apps; Google sites, etc.
+
+  Local ip tunneling
