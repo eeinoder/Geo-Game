@@ -8,7 +8,12 @@ Exercise using HTML, CSS, Javascript, JSON file manipulation.
 ## Features
 
 --TODO:
-  - make day/night modes
+### Bugs
+  - make title and continent divs un-selectable
+
+### Visual
+  - make day/night modes; scrolling speeds up day/night cycle (backwards if scroll in other direction)
+  - transitions: after selecting continent
 
 
 Game mode Ideas:

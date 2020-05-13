@@ -36,9 +36,14 @@ var lastHoverObj;
     if (action === "grayStrobe") { // toggle grayscale filter to create kind of strobe effect
       $(this).click(function () {
         if (isInStrobe === 1) {return -1;}  // Another continent is in this animation.
+        makeLastClickedGray();
         lastClickedObj = this;
+        if (this.id === 'mideast') {
+          lastClickedObj = document.getElementById("asia");
+        }
+        console.log(this.id);
         isInStrobe = 1;
-        grayStrobe($(this), 2*iters, delay);
+        grayStrobe($(lastClickedObj), 2*iters, delay);
       });
     }
     return this;
@@ -97,12 +102,19 @@ function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
    setTimeout(function(){grayStrobe($(thisObj),iters,delay)}, delay);
  }
 
+/* HELPER: set last clicked continent filter to max grayscale (default) */
+ function makeLastClickedGray() {
+   if (lastClickedObj !== undefined) {
+     lastClickedObj.style.filter = "grayscale(100%)";
+   }
+ }
+
 
 
 /* MAP EFFECTS HANDLERS: HOVER, CLICK, ETC. */
 
 // Title animations
-$("h1").animateExtra("clrWave", 14, 70, true).animateExtra("breathe");
+$("h1").animateExtra("clrWave", 14, 70, true);
 
 // Continent click animation
 $(".worldregion").animateExtra("grayStrobe", 5, 100);
@@ -112,7 +124,7 @@ $(".worldregion").hover(function(){
   //console.log(this.id);
   lastHoverObj = this; // use to handle case if obj is "mideast", toggle "asia" obj instead
   if (isInStrobe === 1) {return;}
-  if (lastClickedObj !== undefined) {lastClickedObj.style.filter = "grayscale(100%)";}
+  makeLastClickedGray();
   if (this.id === "mideast") {lastHoverObj = document.getElementById("asia");}
   lastHoverObj.style.filter = "grayscale(0%)";
 }, function() {
@@ -122,10 +134,7 @@ $(".worldregion").hover(function(){
 
 // Click anywhere on document to reset last clicked Object to default grayscale
 $(document).click(function() {
-  console.log("Clicked!")
-  console.log(lastClickedObj);
-  if (lastClickedObj === undefined) {return;} // Continent obj not clicked yet.
-  lastClickedObj.style.filter = "grayscale(100%)";
+  makeLastClickedGray();
 });
 
 
