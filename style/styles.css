@@ -63,47 +63,47 @@ body {
 }
 
 
-#namerica {
+.namerica {
   background: url("imgs/namericaF2.png") no-repeat center / contain;
   width: 32vw;
   height: 20vw;
 }
-#samerica {
+.samerica {
   background: url("imgs/samericaF2.png") no-repeat center / contain;
   width: 15vw;
   height: 20vw;
   margin-top: 18.35vw;
   margin-left: 11.75vw;
 }
-#europe {
+.europe {
   background: url("imgs/europeF2.png") no-repeat center / contain;
   width: 15.05vw;
   height: 11vw;
   margin-top: 1vw;
   margin-left: 30vw;
 }
-#asia {
+.asia {
   background: url("imgs/asiaF2.png") no-repeat center / contain;
   width: 28vw;
   height: 23.5vw;
   margin-top: 0.65vw;
   margin-left: 38.25vw;
 }
-#oceania {
+.oceania {
   background: url("imgs/oceaniaF2.png") no-repeat center / contain;
   width: 14vw;
   height: 12vw;
   margin-top: 21.475vw;
   margin-left: 57.5vw;
 }
-#africa {
+.africa {
   background: url("imgs/africaF2.png")  no-repeat center / contain;
   width: 17vw;
   height: 20vw;
   margin-top: 11.5vw;
   margin-left: 27.6vw;
 }
-#mideast {
+.mideast {
   width: 5.5vw;
   height: 7vw;
   margin-top: 10vw;

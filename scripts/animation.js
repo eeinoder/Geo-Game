@@ -8,8 +8,8 @@ const rotSmoothness = 1; // divide time delay AND shift amount, i.e. distance,
 const initialPos = [12, -69]; // defines maps' initial left margin in vw
 
 var isInStrobe = 0; // global var: defines if grayStrobe is active. Disables things if true.
-var lastClickedObj; // last continent object clicked
-var lastHoverObj;
+var lastClickedObjId; // last continent object clicked
+var lastHoverObjId;
 
 
 
@@ -41,13 +41,13 @@ var lastHoverObj;
       $(this).click(function () {
         if (isInStrobe === 1) {return -1;}  // Another continent is in this animation.
         makeLastClickedGray();
-        lastClickedObj = this;
+        lastClickedObjId = this.id.substr(0, this.id.length-1);
         if (this.id === 'mideast') {
-          lastClickedObj = document.getElementById("asia");
+          lastClickedObjId = "asia";
         }
         console.log(this.id);
         isInStrobe = 1;
-        grayStrobe($(lastClickedObj), 2*iters, delay);
+        grayStrobe(2*iters, delay);
       });
     }
     return this;
@@ -104,18 +104,20 @@ function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
  /* HANDLER: regionHoverIn */
  function regionHoverIn() {
    //console.log(this.id);
-   lastHoverObj = this; // use to handle case if obj is "mideast", toggle "asia" obj instead
+   lastHoverObjId = this.id.substr(0, this.id.length-1); // use to handle case if obj is "mideast", toggle "asia" obj instead
    if (isInStrobe === 1) {return;}
    makeLastClickedGray();
-   if (this.id === "mideast") {lastHoverObj = document.getElementById("asia");}
-   lastHoverObj.style.filter = "grayscale(0%)";
+   if (this.id === "mideast") {lastHoverObjId = "asia";}
+   document.getElementById(lastHoverObjId+'1').style.filter = "grayscale(0%)";
+   document.getElementById(lastHoverObjId+'2').style.filter = "grayscale(0%)";
  }
 
 
  /* HANDLER: regionHoverOut */
  function regionHoverOut() {
    if (isInStrobe === 1) {return;}
-   lastHoverObj.style.filter = "grayscale(100%)";
+   document.getElementById(lastHoverObjId+'1').style.filter = "grayscale(100%)";
+   document.getElementById(lastHoverObjId+'2').style.filter = "grayscale(100%)";
  }
 
 
@@ -125,7 +127,7 @@ function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
 
 
 /* HELPER: after click, toggle grayscale to produce flash effect */
- function grayStrobe(thisObj, iters, delay) {
+ function grayStrobe(iters, delay) {
    // Toggle grayscale: 0, 1, 0, 1, ...
    // Iters is doubled, i.e. for 4 cycles, you toggle grayscale 8 times
    iters--;
@@ -133,15 +135,17 @@ function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
      isInStrobe = 0;
      return -1;
    }
-   thisObj.css("filter", "grayscale("+iters%2+")");
-   setTimeout(function(){grayStrobe($(thisObj),iters,delay)}, delay);
+   $('#'+lastClickedObjId+'1').css("filter", "grayscale("+iters%2+")");
+   $('#'+lastClickedObjId+'2').css("filter", "grayscale("+iters%2+")");
+   setTimeout(function(){grayStrobe(iters,delay)}, delay);
  }
 
 
 /* HELPER: set last clicked continent filter to max grayscale (default) */
  function makeLastClickedGray() {
-   if (lastClickedObj !== undefined) {
-     lastClickedObj.style.filter = "grayscale(100%)";
+   if (lastClickedObjId !== undefined) {
+     document.getElementById(lastClickedObjId+'1').style.filter = "grayscale(100%)";
+     document.getElementById(lastClickedObjId+'2').style.filter = "grayscale(100%)";
    }
  }
 
