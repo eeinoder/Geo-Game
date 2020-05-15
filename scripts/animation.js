@@ -3,6 +3,10 @@ const dT = 400;
 const colors = ["fd747d","fdc674","fdf674","7bf184","90ccfd","9c90fd","eb90fd"];
 const defColor = "1faffe";
 
+const rotSpeed = 1; // divide time delay by this val
+const rotSmoothness = 1; // divide time delay AND shift amount, i.e. distance,
+const initialPos = [12, -69]; // defines maps' initial left margin in vw
+
 var isInStrobe = 0; // global var: defines if grayStrobe is active. Disables things if true.
 var lastClickedObj; // last continent object clicked
 var lastHoverObj;
@@ -50,6 +54,12 @@ var lastHoverObj;
   };
 }(jQuery));
 
+
+
+
+/*                --------------------HANDLERS--------------------            */
+
+
 /* WAVE ANIMATION HELPER FUNCTION */
 /* works with: any size string, any number of colors, any number of iters, at any speed*/
 function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
@@ -90,6 +100,31 @@ function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
    }
  }
 
+
+ /* HANDLER: regionHoverIn */
+ function regionHoverIn() {
+   //console.log(this.id);
+   lastHoverObj = this; // use to handle case if obj is "mideast", toggle "asia" obj instead
+   if (isInStrobe === 1) {return;}
+   makeLastClickedGray();
+   if (this.id === "mideast") {lastHoverObj = document.getElementById("asia");}
+   lastHoverObj.style.filter = "grayscale(0%)";
+ }
+
+
+ /* HANDLER: regionHoverOut */
+ function regionHoverOut() {
+   if (isInStrobe === 1) {return;}
+   lastHoverObj.style.filter = "grayscale(100%)";
+ }
+
+
+
+
+/*           --------------------HELPER FUNCTIONS--------------------         */
+
+
+/* HELPER: after click, toggle grayscale to produce flash effect */
  function grayStrobe(thisObj, iters, delay) {
    // Toggle grayscale: 0, 1, 0, 1, ...
    // Iters is doubled, i.e. for 4 cycles, you toggle grayscale 8 times
@@ -102,6 +137,7 @@ function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
    setTimeout(function(){grayStrobe($(thisObj),iters,delay)}, delay);
  }
 
+
 /* HELPER: set last clicked continent filter to max grayscale (default) */
  function makeLastClickedGray() {
    if (lastClickedObj !== undefined) {
@@ -110,32 +146,76 @@ function colorWaveIn(thisObj, curr_idx, iters, delay, isOut) {
  }
 
 
+ /* HELPER: shift map to the right (rotating effect) */
+function shiftMapRight(shiftVW) {
+  var i;
+  for (i=0; i<2; i++) {
+    var mapName = '#map'+(i+1);
+    var otherMap = '#map'+((i+1)%2+1);
+    var newMarginVW = getLeftMarginVW(mapName)+shiftVW ;
+    var approxPos = Math.round(newMarginVW*100)/100; //round to nearest 0.01 vw (???)
+    $(mapName).css("margin-left", newMarginVW+"vw");
+    if (approxPos === initialPos[0]) { // Map1 is back to its initial pos. Set Map2 to its initial pos.
+      resetMapPos(otherMap, initialPos[1]);
+    }
+  }
+}
 
-/* MAP EFFECTS HANDLERS: HOVER, CLICK, ETC. */
 
-// Title animations
-$("h1").animateExtra("clrWave", 14, 70, true);
+/* HELPER: reset map left margin to param: pos (float in vw units) */
+function resetMapPos(mapName, pos) {
+  console.log(mapName);
+  console.log(pos);
+  $(mapName).css("margin-left", pos+"vw");
+}
 
-// Continent click animation
-$(".worldregion").animateExtra("grayStrobe", 5, 100);
 
-// Continent hover effects
-$(".worldregion").hover(function(){
-  //console.log(this.id);
-  lastHoverObj = this; // use to handle case if obj is "mideast", toggle "asia" obj instead
-  if (isInStrobe === 1) {return;}
-  makeLastClickedGray();
-  if (this.id === "mideast") {lastHoverObj = document.getElementById("asia");}
-  lastHoverObj.style.filter = "grayscale(0%)";
-}, function() {
-  if (isInStrobe === 1) {return;}
-  lastHoverObj.style.filter = "grayscale(100%)";
+/* HELPER: get left margin in vw units */
+function getLeftMarginVW(elementId) {
+  var leftMarginStr = $(elementId).css('margin-left');
+  var leftMarginPx = parseFloat(leftMarginStr.substr(0,leftMarginStr.length-2));
+  return 100*leftMarginPx/window.innerWidth;
+}
+
+
+
+
+
+/*                --------------------MAIN--------------------                */
+
+$(document).ready(function() {
+  shift();
+  // Title animations
+  $("h1").animateExtra("clrWave", 14, 70, true);
+  // Continent click animation
+  $(".worldregion").animateExtra("grayStrobe", 5, 100);
+  // Continent hover effects
+  $(".worldregion").hover(regionHoverIn, regionHoverOut);
+  // Click anywhere on document to reset last clicked Object to default grayscale
+  $(document).click(function() {
+    makeLastClickedGray();
+  });
+  // Set interval and timeout for rotations/shift effect for worldmap
+  var delay = 400;
+  function shift() {
+    var i;
+    // Shift maps by 1vw. Swap if necessary.
+    shiftMapRight(1);
+    // Loop.
+    setTimeout(shift, delay);
+  }
 });
 
-// Click anywhere on document to reset last clicked Object to default grayscale
-$(document).click(function() {
-  makeLastClickedGray();
-});
+// World map rotation psequdocode:
+
+// starting map positions: 2, 1, _
+
+// loop shift
+// if map2 curr left-margin === map1 intitial left-margin, "reset" map1 to map2 initial left-margin: 1, 2, _
+// loop shift
+// if if map1 curr left-margin === map1 intitial left-margin, "reset" map2 to map2 initial left-margin: 2, 1, _
+// repeat
+
 
 
 /* End of script */

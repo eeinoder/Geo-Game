@@ -6,8 +6,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-  <h1>Geo Game</h1>
-  <div class="worldmap">
+  <h1 style="z-index:3">Geo Game</h1>
+  <div class="worldmap" id="map1" style="z-index:1">
     <div class="worldregion noselect" id="namerica"></div>
     <div class="worldregion noselect" id="samerica"></div>
     <div class="worldregion noselect" id="oceania"></div>
@@ -16,8 +16,19 @@
     <div class="worldregion noselect" id="africa"></div>
     <div class="worldregion noselect" id="mideast"></div> <!-- small region container added as "hack" -->
   </div>
+  <div class="worldmap" id="map2" style="z-index:1">
+    <div class="worldregion noselect" id="namerica"></div>
+    <div class="worldregion noselect" id="samerica"></div>
+    <div class="worldregion noselect" id="oceania"></div>
+    <div class="worldregion noselect" id="asia"></div>
+    <div class="worldregion noselect" id="europe"></div>
+    <div class="worldregion noselect" id="africa"></div>
+    <div class="worldregion noselect" id="mideast"></div> <!-- small region container added as "hack" -->
+  </div>
+  <!--div id="background" style="z-index:2"></div-->
 </body>
 <script src="scripts/animation.js"></script>
+<script src="scripts/main.js"></script>
 </html>
 
 

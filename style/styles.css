@@ -14,11 +14,21 @@ h1 {
   color: #1faffe;
   text-align: center;
   font-size: 8vw; /* font is 8% of view window, i.e. resizes with window */
-  width: 100%;
+  width: 100vw;
 }
 
 body {
   background-color: #75fbfd;
+}
+
+#background {
+  position: absolute;
+  width: 100vw;
+  height: 50vw;
+  background: url('imgs/ovalcutout.png') no-repeat center center fixed;
+  background-size: contain;
+  margin-top: 0vw;
+  margin-left: -1vw;
 }
 
 .noselect {
@@ -34,8 +44,10 @@ body {
   position: absolute;
   margin-top: 18vw;
   margin-left: 12vw;
-  margin-right: auto;
-  width: 80%;
+  width: 80vw;
+}
+#map2 {
+  margin-left: -69vw;
 }
 
 .worldregion {
