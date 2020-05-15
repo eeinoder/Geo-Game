@@ -13,22 +13,28 @@ h1 {
   font-family: arcadeclassicregular;
   color: #1faffe;
   text-align: center;
-  font-size: 8vw; /* font is 8% of view window, i.e. resizes with window */
+  font-size: 10vw; /* font is 8% of view window, i.e. resizes with window */
   width: 100vw;
 }
 
 body {
-  background-color: #75fbfd;
+  background-color: #0c26f5;
 }
 
-#background {
+.background {
   position: absolute;
-  width: 100vw;
+  width: 102vw;
   height: 50vw;
-  background: url('imgs/ovalcutout.png') no-repeat center center fixed;
-  background-size: contain;
-  margin-top: 0vw;
-  margin-left: -1vw;
+  margin-top: 20vw;
+  margin-left: -2vw;
+}
+#bg1 {
+  background-color: #75fbfd;
+}
+#bg2 {
+  pointer-events: none;
+  background: url('imgs/ovalcutout.png') no-repeat;
+  background-size: cover;
 }
 
 .noselect {
@@ -42,7 +48,7 @@ body {
 
 .worldmap {
   position: absolute;
-  margin-top: 18vw;
+  margin-top: 28vw;
   margin-left: 12vw;
   width: 80vw;
 }

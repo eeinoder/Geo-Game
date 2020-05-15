@@ -198,11 +198,8 @@ $(document).ready(function() {
   // Set interval and timeout for rotations/shift effect for worldmap
   var delay = 400;
   function shift() {
-    var i;
-    // Shift maps by 1vw. Swap if necessary.
-    shiftMapRight(1);
-    // Loop.
-    setTimeout(shift, delay);
+    shiftMapRight(1); // Shift maps by 1vw. Swap if necessary.
+    setTimeout(shift, delay); // loop.
   }
 });
 
