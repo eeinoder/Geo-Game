@@ -198,6 +198,8 @@ $(document).ready(function() {
   // Click anywhere on document to reset last clicked Object to default grayscale
   $(document).click(function() {
     makeLastClickedGray();
+    console.log($('h1').css('font-size'));
+    console.log($('h1').css('width'));
   });
   // Set interval and timeout for rotations/shift effect for worldmap
   var delay = 400;
