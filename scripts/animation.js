@@ -13,6 +13,8 @@ var lastHoverObjId;
 
 
 // TODO: give max/min vals to size/width of objects
+//        edit star patterns, too many bright at one time
+//
 
 /* TITLE ANIMATION PLUGIN */
 /* Params
@@ -188,7 +190,7 @@ function getLeftMarginVW(elementId) {
 
 /*                --------------------MAIN--------------------                */
 
-$(document).ready(function() {
+$(window).ready(function() {
   shift();
   // Title animations
   $("h1").animateExtra("clrWave", 14, 70, true);
