@@ -19,7 +19,10 @@ h1 {
 }
 
 body {
-  background-color: #000000;
+  background: url('imgs/kosmos1.jpg') center center;
+  /*background: url('imgs/nightsky.jpg') no-repeat center center fixed;*/
+  background-size: cover;
+  /*background-color: #ffffff;*/
   /*background-color: #0c26f5;*/
 }
 
@@ -28,14 +31,14 @@ body {
   width: 104vw;
   height: 55vw;
   margin-top: 20vw;
-  margin-left: -3vw;
+  margin-left: -5vw;
 }
 #bg1 {
   background-color: #75fbfd;
 }
 #bg2 {
   pointer-events: none;
-  background: url('imgs/bluehalo75.png') no-repeat;
+  background: url('imgs/kosmoshalo.png') no-repeat;
   background-size: cover;
 }
 

@@ -12,6 +12,7 @@ var lastClickedObjId; // last continent object clicked
 var lastHoverObjId;
 
 
+// TODO: give max/min vals to size/width of objects
 
 /* TITLE ANIMATION PLUGIN */
 /* Params
@@ -203,8 +204,17 @@ $(document).ready(function() {
   });
   // Set interval and timeout for rotations/shift effect for worldmap
   var delay = 400;
+  var counter = 0;
+  var bgPic = 1;
   function shift() {
     shiftMapRight(1); // Shift maps by 1vw. Swap if necessary.
+    counter++;
+    if (counter%5 == 0) { // every n shifts, flicker the stars by changing the background image
+      bgPic = ((bgPic+1)%3)+1;
+      var url = 'style/imgs/kosmos'+bgPic+'.jpg';
+      document.body.style.background = "url("+url+") center center";
+      document.body.style.backgroundSize = "cover";
+    }
     setTimeout(shift, delay); // loop.
   }
 });
